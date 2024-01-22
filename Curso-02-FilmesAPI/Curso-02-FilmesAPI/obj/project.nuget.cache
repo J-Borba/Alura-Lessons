@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "tgA+1m6d+ZBOxqXVm+cEtG+FrZoVcKs85n7sn1fGPY+nlVN6gqctMohOw3SuPOSQ1nDSu4a5TIr4dqUe0t+wCQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\jborba\\source\\repos\\Alura-Lessons\\Curso-02-FilmesAPI\\Curso-02-FilmesAPI\\Curso-02-FilmesAPI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\jborba\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\jborba\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\jborba\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
+    "C:\\Users\\jborba\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
+    "C:\\Users\\jborba\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
+    "C:\\Users\\jborba\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
