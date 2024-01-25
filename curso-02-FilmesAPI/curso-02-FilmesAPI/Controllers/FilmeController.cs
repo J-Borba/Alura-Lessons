@@ -57,7 +57,7 @@ namespace curso_02_FilmesAPI.Controllers
 
             return NoContent();
         }
-        
+
         [HttpPatch("{id}")]
         public IActionResult PatchFilme(int id, [FromBody] JsonPatchDocument<UpdateFilmeDto> filmeJsonDto)
         {
@@ -76,6 +76,20 @@ namespace curso_02_FilmesAPI.Controllers
             }
 
             _mapper.Map(patchFilme, filme);
+            _context.SaveChanges();
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeletarFilme(int id)
+        {
+            var filme = _context.Filmes.FirstOrDefault(x => x.Id == id);
+
+            if (filme == null)
+                return NotFound();
+
+            _context.Remove(filme);
             _context.SaveChanges();
 
             return NoContent();
