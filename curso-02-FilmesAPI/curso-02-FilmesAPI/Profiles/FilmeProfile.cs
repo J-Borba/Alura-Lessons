@@ -11,6 +11,7 @@ namespace curso_02_FilmesAPI.Profiles
             CreateMap<CreateFilmeDto, Filme>();
             CreateMap<UpdateFilmeDto, Filme>();
             CreateMap<Filme, UpdateFilmeDto>();
+            CreateMap<Filme, ReadFilmeDto>();
         }
 
     }

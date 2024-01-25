@@ -21,17 +21,26 @@ namespace curso_02_FilmesAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Filme> GetFilmes()
+        public IEnumerable<ReadFilmeDto> GetFilmes()
         {
-            return _context.Filmes;
+            var filmes = _context.Filmes;
+
+            var filmesDto = _mapper.Map<IEnumerable<ReadFilmeDto>>(filmes).ToList();
+
+            return filmesDto;
         }
 
         [HttpGet("{id}")]
         public IActionResult GetFilmeById(int id)
         {
-            var result = _context.Filmes.FirstOrDefault(f => f.Id == id);
+            var filme = _context.Filmes.FirstOrDefault(f => f.Id == id);
 
-            return result == null ? NotFound() : Ok(result);
+            if (filme == null)
+                return NotFound();
+
+            var filmeDto = _mapper.Map<ReadFilmeDto>(filme);
+
+            return Ok(filmeDto);
         }
 
         [HttpPost]
