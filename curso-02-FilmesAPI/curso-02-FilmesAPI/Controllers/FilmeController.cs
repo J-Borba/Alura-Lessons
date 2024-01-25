@@ -1,4 +1,5 @@
-﻿using curso_02_FilmesAPI.Models;
+﻿using curso_02_FilmesAPI.Data;
+using curso_02_FilmesAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace curso_02_FilmesAPI.Controllers
@@ -7,28 +8,32 @@ namespace curso_02_FilmesAPI.Controllers
     [Route("[controller]")]
     public class FilmeController : ControllerBase
     {
-        private static List<Filme> filmes = new List<Filme>();
-        private static int Id = 0;
+        private FilmeContext _context;
 
-        [Route("/[controller]/buscar"), HttpGet]
-        public IEnumerable<Filme> GetFilmes()
+        public FilmeController(FilmeContext context)
         {
-            return filmes;
+            _context = context;
         }
 
-        [Route("/[controller]/buscar/{id}"), HttpGet]
+        [HttpGet]
+        public IEnumerable<Filme> GetFilmes()
+        {
+            return _context.Filmes;
+        }
+
+        [HttpGet("{id}")]
         public IActionResult GetFilmeById(int id)
         {
-            var result = filmes.FirstOrDefault(f => f.Id == id);
+            var result = _context.Filmes.FirstOrDefault(f => f.Id == id);
 
             return result == null ? NotFound() : Ok(result);
         }
 
-        [Route("/[controller]/adicionar"), HttpPost]
+        [HttpPost]
         public IActionResult AdicionarFilme([FromBody] Filme filme)
         {
-            filme.Id = Id++;
-            filmes.Add(filme);
+            _context.Filmes.Add(filme);
+            _context.SaveChanges();
             return CreatedAtAction(nameof(GetFilmeById), new { id = filme.Id }, filme);
         }
     }

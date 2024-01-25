@@ -10,7 +10,6 @@ namespace curso_02_FilmesAPI.Data
             
         }
 
-        public DbSet<Filme> DbSet { get; set; }
+        public DbSet<Filme> Filmes { get; set; }
     }
 }
-apps
