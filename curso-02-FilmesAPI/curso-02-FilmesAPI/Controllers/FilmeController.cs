@@ -20,6 +20,12 @@ namespace curso_02_FilmesAPI.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Busca todos os filmes do banco de dados.
+        /// </summary>
+        /// <returns>IEnumerable</returns>
+        /// <response code="200">Busca realizada com sucesso</response>
+        /// <response code="404">Nenhum filme encontrado</response>
         [HttpGet]
         public IEnumerable<ReadFilmeDto> GetFilmes()
         {
@@ -30,6 +36,12 @@ namespace curso_02_FilmesAPI.Controllers
             return filmesDto;
         }
 
+        /// <summary>
+        /// Busca o filme do banco de dados pelo id.
+        /// </summary>
+        /// <returns>IActionResult</returns>
+        /// <response code="200">Busca realizada com sucesso</response>
+        /// <response code="404">Nenhum filme encontrado</response>
         [HttpGet("{id}")]
         public IActionResult GetFilmeById(int id)
         {
@@ -43,7 +55,13 @@ namespace curso_02_FilmesAPI.Controllers
             return Ok(filmeDto);
         }
 
-        [HttpPost]
+        /// <summary>
+        /// Adiciona um filme ao banco de dados.
+        /// </summary>
+        /// <param name="filmeDto">Objeto com os campos necessários para criação de um filme</param>
+        /// <returns>IActionResult</returns>
+        /// <response code="201">Inserção realizada com sucesso</response>
+        [HttpPost, ProducesResponseType(StatusCodes.Status201Created)]
         public IActionResult AdicionarFilme([FromBody] CreateFilmeDto filmeDto)
         {
             var filme = _mapper.Map<Filme>(filmeDto);
@@ -53,6 +71,14 @@ namespace curso_02_FilmesAPI.Controllers
             return CreatedAtAction(nameof(GetFilmeById), new { id = filme.Id }, filme);
         }
 
+        /// <summary>
+        /// Atualiza um filme do banco de dados.
+        /// </summary>
+        /// <param name="id">Id do filme para atualizar.</param>
+        /// <param name="filmeDto">Objeto com os campos necessários para atualização de um filme.</param>
+        /// <returns>IActionResult</returns>
+        /// <response code="204">Atualização realizada com sucesso.</response>
+        /// <response code="404">Nenhum filme encontrado.</response>
         [HttpPut("{id}")]
         public IActionResult AtualizarFilme(int id, [FromBody] UpdateFilmeDto filmeDto)
         {
@@ -67,6 +93,14 @@ namespace curso_02_FilmesAPI.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Atualiza dados de um filme do banco de dados.
+        /// </summary>
+        /// <param name="id">Id do filme para atualizar.</param>
+        /// <param name="filmeJsonDto">Objeto com os campos que deseja alterar de um filme.</param>
+        /// <returns>IActionResult</returns>
+        /// <response code="204">Atualização realizada com sucesso</response>
+        /// <response code="404">Nenhum filme encontrado.</response>
         [HttpPatch("{id}")]
         public IActionResult PatchFilme(int id, [FromBody] JsonPatchDocument<UpdateFilmeDto> filmeJsonDto)
         {
@@ -90,6 +124,13 @@ namespace curso_02_FilmesAPI.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Deleta um filme do banco de dados.
+        /// </summary>
+        /// <param name="id">Id do filme para atualizar.</param>
+        /// <returns>IActionResult</returns>
+        /// <response code="204">Remoção realizada com sucesso</response>
+        /// <response code="404">Nenhum filme encontrado.</response>
         [HttpDelete("{id}")]
         public IActionResult DeletarFilme(int id)
         {
