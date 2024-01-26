@@ -23,13 +23,15 @@ namespace curso_02_FilmesAPI.Controllers
         /// <summary>
         /// Busca todos os filmes do banco de dados.
         /// </summary>
+        /// <param name="skip">Quantidade de registros a pular.</param>
+        /// <param name="take">Quantidade de registros a pegar.</param>
         /// <returns>IEnumerable</returns>
         /// <response code="200">Busca realizada com sucesso</response>
         /// <response code="404">Nenhum filme encontrado</response>
         [HttpGet]
-        public IEnumerable<ReadFilmeDto> GetFilmes()
+        public IEnumerable<ReadFilmeDto> GetFilmes([FromQuery] int skip = 0, [FromQuery] int take = 50)
         {
-            var filmes = _context.Filmes;
+            var filmes = _context.Filmes.Skip(skip).Take(take);
 
             var filmesDto = _mapper.Map<IEnumerable<ReadFilmeDto>>(filmes).ToList();
 
