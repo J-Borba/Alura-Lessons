@@ -44,14 +44,16 @@ namespace curso_02_FilmesAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult AdicionarCinema([FromBody] ReadCinemaDto dto)
+        public IActionResult AdicionarCinema([FromBody] CreateCinemaDto dto)
         {
             var cinema = _mapper.Map<Cinema>(dto);
+            cinema.Id = _context.Cinemas.Any() ? _context.Cinemas.Max(x => x.Id) : 0;
+            cinema.Id++;
 
             _context.Cinemas.Add(cinema);
             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetCinemaById), new { id = cinema.Id }, dto);
+            return CreatedAtAction(nameof(GetCinemaById), new { Id = cinema.Id }, cinema);
         }
 
         [HttpPut("{id}")]

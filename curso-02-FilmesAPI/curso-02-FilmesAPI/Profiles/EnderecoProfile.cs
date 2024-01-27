@@ -8,9 +8,9 @@ namespace curso_02_FilmesAPI.Profiles
     {
         public EnderecoProfile()
         {
+            CreateMap<CreateEnderecoDto, Endereco>();
             CreateMap<Endereco, ReadEnderecoDto>();
-            CreateMap<CreateEnderecoDto, Endereco>();
-            CreateMap<CreateEnderecoDto, Endereco>();
+            CreateMap<UpdateEnderecoDto, Endereco>();
         }
     }
 }

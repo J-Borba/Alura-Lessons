@@ -66,12 +66,13 @@ namespace curso_02_FilmesAPI.Controllers
         public IActionResult AdicionarFilme([FromBody] CreateFilmeDto dto)
         {
             var filme = _mapper.Map<Filme>(dto);
-            filme.Id = _context.Filmes.Max(x => x.Id) + 1;
+            filme.Id = _context.Filmes.Any() ? _context.Filmes.Max(x => x.Id) : 0;
+            filme.Id++;
 
             _context.Filmes.Add(filme);
             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetFilmeById), new { id = filme.Id }, filme);
+            return CreatedAtAction(nameof(GetFilmeById), new { Id = filme.Id }, filme);
         }
 
         /// <summary>

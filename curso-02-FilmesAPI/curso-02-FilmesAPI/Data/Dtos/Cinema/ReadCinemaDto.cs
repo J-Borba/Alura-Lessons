@@ -1,13 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using curso_02_FilmesAPI.Data.Dtos.Endereco;
 
 namespace curso_02_FilmesAPI.Data.Dtos.Cinema
 {
     public class ReadCinemaDto
     {
-        [Key, Required]
         public int Id { get; set; }
-
-        [Required(ErrorMessage = "Campo Nome Obrigatório.")]
         public string Nome { get; set; }
+        public ReadEnderecoDto ReadEnderecoDto { get; set; }
     }
 }

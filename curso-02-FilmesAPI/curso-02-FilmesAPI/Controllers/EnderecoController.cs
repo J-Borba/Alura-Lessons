@@ -7,11 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace curso_02_FilmesAPI.Controllers
 {
-    [ApiController ,Route("[controller]")]
+    [ApiController]
+    [Route("[controller]")]
     public class EnderecoController : ControllerBase
     {
         private readonly FilmeContext _context;
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
 
         public EnderecoController(FilmeContext context, IMapper mapper)
         {
@@ -47,11 +48,13 @@ namespace curso_02_FilmesAPI.Controllers
         public IActionResult AdicionarEndereco([FromBody] CreateEnderecoDto dto)
         {
             var endereco = _mapper.Map<Endereco>(dto);
+            endereco.Id = _context.Enderecos.Any() ? _context.Enderecos.Max(x => x.Id) : 0;
+            endereco.Id++;
 
             _context.Enderecos.Add(endereco);
             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetEnderecoById), new { id = endereco.Id }, dto);
+            return CreatedAtAction(nameof(GetEnderecoById), new { id = endereco.Id }, endereco);
         }
 
         [HttpPut("{id}")]
