@@ -4,6 +4,7 @@ using curso_02_FilmesAPI.Data.Dtos.Filme;
 using curso_02_FilmesAPI.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace curso_02_FilmesAPI.Controllers
 {
@@ -24,17 +25,21 @@ namespace curso_02_FilmesAPI.Controllers
         /// </summary>
         /// <param name="skip">Quantidade de registros a pular.</param>
         /// <param name="take">Quantidade de registros a pegar.</param>
+        /// <param name="nomeCinema">Nome do Cinema onde passa o Filme Desejado</param>
         /// <returns>IEnumerable</returns>
         /// <response code="200">Busca realizada com sucesso</response>
         /// <response code="404">Nenhum filme encontrado</response>
         [HttpGet]
-        public IEnumerable<ReadFilmeDto> GetAllFilmes([FromQuery] int skip = 0, [FromQuery] int take = 50)
+        public IActionResult GetAllFilmes([FromQuery] int skip = 0, [FromQuery] int take = 50, [FromQuery] string? nomeCinema = null)
         {
             var filmes = _context.Filmes.Skip(skip).Take(take).ToList();
 
-            var dto = _mapper.Map<IEnumerable<ReadFilmeDto>>(filmes);
+            if (nomeCinema != null)
+                filmes = filmes.Where(x => x.Sessoes.Any(s => s.Cinema.Nome.ToLower().Contains(nomeCinema.ToLower()))).ToList();
 
-            return dto;
+                var dtos = _mapper.Map<IEnumerable<ReadFilmeDto>>(filmes);
+
+            return dtos.Any() ? Ok(dtos) : NotFound();
         }
 
         /// <summary>
