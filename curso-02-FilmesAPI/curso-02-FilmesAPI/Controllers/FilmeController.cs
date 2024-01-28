@@ -30,9 +30,9 @@ namespace curso_02_FilmesAPI.Controllers
         [HttpGet]
         public IEnumerable<ReadFilmeDto> GetAllFilmes([FromQuery] int skip = 0, [FromQuery] int take = 50)
         {
-            var filmes = _context.Filmes.Skip(skip).Take(take);
+            var filmes = _context.Filmes.Skip(skip).Take(take).ToList();
 
-            var dto = _mapper.Map<IEnumerable<ReadFilmeDto>>(filmes).ToList();
+            var dto = _mapper.Map<IEnumerable<ReadFilmeDto>>(filmes);
 
             return dto;
         }

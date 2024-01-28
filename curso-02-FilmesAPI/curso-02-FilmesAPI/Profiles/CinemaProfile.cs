@@ -10,8 +10,8 @@ namespace curso_02_FilmesAPI.Profiles
         {
             CreateMap<CreateCinemaDto, Cinema>();
             CreateMap<Cinema, ReadCinemaDto>()
-                .ForMember(dto => dto.Endereco,
-                    config => config.MapFrom(c => c.Endereco));
+                .ForMember(cinemaDto => cinemaDto.Endereco, config => config.MapFrom(cinema => cinema.Endereco))
+                .ForMember(cinemaDto => cinemaDto.Sessoes, config => config.MapFrom(cinema => cinema.Sessoes));
             CreateMap<UpdateCinemaDto, Cinema>();
         }
     }
