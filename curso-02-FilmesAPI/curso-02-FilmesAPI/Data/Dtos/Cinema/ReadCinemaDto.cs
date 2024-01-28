@@ -6,6 +6,6 @@ namespace curso_02_FilmesAPI.Data.Dtos.Cinema
     {
         public int Id { get; set; }
         public string Nome { get; set; }
-        public ReadEnderecoDto ReadEnderecoDto { get; set; }
+        public ReadEnderecoDto Endereco { get; set; }
     }
 }
