@@ -20,13 +20,13 @@ namespace curso_02_FilmesAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<ReadCinemaDto> GetAllCinemas()
+        public IActionResult GetAllCinemas([FromQuery] int? enderecoId = null)
         {
-            var cinemas = _context.Cinemas.ToList();
+            var cinemas = enderecoId == null ? _context.Cinemas.ToList() : _context.Cinemas.Where(x => x.EnderecoId == enderecoId).ToList();
 
             var dtos = _mapper.Map<List<ReadCinemaDto>>(cinemas);
 
-            return dtos;
+            return dtos.Any() ? Ok(dtos) : NotFound();
         }
 
         [HttpGet("{id}")]

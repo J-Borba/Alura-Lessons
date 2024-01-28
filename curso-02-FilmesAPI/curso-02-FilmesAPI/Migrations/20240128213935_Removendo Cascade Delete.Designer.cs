@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using curso_02_FilmesAPI.Data;
 
@@ -10,9 +11,10 @@ using curso_02_FilmesAPI.Data;
 namespace curso_02_FilmesAPI.Migrations
 {
     [DbContext(typeof(FilmeContext))]
-    partial class FilmeContextModelSnapshot : ModelSnapshot
+    [Migration("20240128213935_Removendo Cascade Delete")]
+    partial class RemovendoCascadeDelete
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

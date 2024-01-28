@@ -24,6 +24,11 @@ namespace curso_02_FilmesAPI.Data
                 .WithMany(f => f.Sessoes)
                 .HasForeignKey(x => x.FilmeId);
 
+            b.Entity<Endereco>()
+                .HasOne(x => x.Cinema)
+                .WithOne(x => x.Endereco)
+                .OnDelete(DeleteBehavior.Restrict);
+
             base.OnModelCreating(b);
         }
 
