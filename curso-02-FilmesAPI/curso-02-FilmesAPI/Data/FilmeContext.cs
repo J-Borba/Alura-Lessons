@@ -7,7 +7,24 @@ namespace curso_02_FilmesAPI.Data
     {
         public FilmeContext(DbContextOptions<FilmeContext> options) : base(options)
         {
-            
+        }
+
+        protected override void OnModelCreating(ModelBuilder b)
+        {
+            b.Entity<Sessao>()
+                .HasKey(x => new { x.FilmeId, x.CinemaId });
+
+            b.Entity<Sessao>()
+                .HasOne(x => x.Cinema)
+                .WithMany(c => c.Sessoes)
+                .HasForeignKey(x => x.CinemaId);
+
+            b.Entity<Sessao>()
+                .HasOne(x => x.Filme)
+                .WithMany(f => f.Sessoes)
+                .HasForeignKey(x => x.FilmeId);
+
+            base.OnModelCreating(b);
         }
 
         public DbSet<Filme> Filmes { get; set; }
