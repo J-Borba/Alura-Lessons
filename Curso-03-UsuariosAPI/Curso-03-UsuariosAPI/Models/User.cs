@@ -1,5 +1,10 @@
-﻿namespace Curso_03_UsuariosAPI.Models;
+﻿using Microsoft.AspNetCore.Identity;
 
-public class User
+namespace Curso_03_UsuariosAPI.Models;
+
+public class User : IdentityUser
 {
+    public DateTime BirthDate { get; set; }
+
+    public User() : base() { }
 }
