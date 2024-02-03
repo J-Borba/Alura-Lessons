@@ -3,6 +3,7 @@ using Curso_03_UsuariosAPI.Data.D0tos.Usuario;
 using Curso_03_UsuariosAPI.Data.Dtos.Usuario;
 using Curso_03_UsuariosAPI.Models;
 using Curso_03_UsuariosAPI.Services.Interfaces;
+using Curso_03_UsuariosAPI.Services.Validation;
 using Microsoft.AspNetCore.Identity;
 
 namespace Curso_03_UsuariosAPI.Services;

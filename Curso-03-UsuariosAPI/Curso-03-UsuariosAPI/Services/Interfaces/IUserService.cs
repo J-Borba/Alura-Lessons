@@ -1,6 +1,6 @@
 ﻿using Curso_03_UsuariosAPI.Data.D0tos.Usuario;
 using Curso_03_UsuariosAPI.Data.Dtos.Usuario;
-using Curso_03_UsuariosAPI.Models;
+using Curso_03_UsuariosAPI.Services.Validation;
 
 namespace Curso_03_UsuariosAPI.Services.Interfaces;
 

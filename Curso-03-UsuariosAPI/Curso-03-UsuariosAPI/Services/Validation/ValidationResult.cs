@@ -1,4 +1,4 @@
-﻿namespace Curso_03_UsuariosAPI.Models;
+﻿namespace Curso_03_UsuariosAPI.Validation;
 
 public class ValidationResult
 {
@@ -26,7 +26,7 @@ public class ValidationResult
     {
         if (errorMessages.Any())
         {
-            if (errorMessages.Any(x => string.IsNullOrEmpty(x)))
+            if (errorMessages.Any(string.IsNullOrEmpty))
             {
                 throw new ApplicationException("All error messages must have a value.");
             }

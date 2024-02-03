@@ -1,3 +1,4 @@
+using Curso_03_UsuariosAPI.Authorization;
 using Curso_03_UsuariosAPI.Data;
 using Curso_03_UsuariosAPI.Models;
 using Curso_03_UsuariosAPI.Services;
@@ -19,6 +20,9 @@ builder.Services.AddIdentity<User, IdentityRole>()
                 .AddDefaultTokenProviders();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddAuthorizationBuilder()
+                .AddPolicy("IdadeMinima", p => p.AddRequirements(new IdadeMinima(18)));
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
