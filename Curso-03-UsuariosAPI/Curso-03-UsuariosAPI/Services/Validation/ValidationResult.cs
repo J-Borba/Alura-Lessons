@@ -1,4 +1,4 @@
-﻿namespace Curso_03_UsuariosAPI.Validation;
+﻿namespace Curso_03_UsuariosAPI.Services.Validation;
 
 public class ValidationResult
 {
