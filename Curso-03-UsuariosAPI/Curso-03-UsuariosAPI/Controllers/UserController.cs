@@ -6,30 +6,30 @@ using Microsoft.AspNetCore.Mvc;
 namespace Curso_03_UsuariosAPI.Controllers;
 
 [ApiController, Route("[controller]")]
-public class UsuarioController : ControllerBase
+public class UserController : ControllerBase
 {
     #region Dependency Injections
     private readonly IUserService _userService;
 
-    public UsuarioController(IUserService userService)
+    public UserController(IUserService userService)
     {
         _userService = userService;
     }
     #endregion
 
-    [HttpGet]
-    public IActionResult GetAllUsers()
-    {
-        throw new NotImplementedException();
-    }
+    //[HttpGet]
+    //public IActionResult GetAllUsers()
+    //{
+    //    throw new NotImplementedException();
+    //}
 
-    [HttpGet("{id}")]
-    public IActionResult GetUserById(int id)
-    {
-        throw new NotImplementedException();
-    }
+    //[HttpGet("{id}")]
+    //public IActionResult GetUserById(int id)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
-    [HttpPost("SignIn")]
+    [HttpPost("Signin")]
     public async Task<IActionResult> CreateUser([FromBody] CreateUserDto dto)
     {
         var result = await _userService.CreateUserAsync(dto);
@@ -40,8 +40,8 @@ public class UsuarioController : ControllerBase
     [HttpPost("Login")]
     public async Task<IActionResult> Login([FromBody] LoginUserDto dto)
     {
-        var result = await _userService.LoginUserAsync(dto);
+        (var validation, string token) = await _userService.LoginUserAsync(dto);
 
-        return result.IsValid ? Ok("User authenticated.") : BadRequest(result.ErrorMessages);
+        return validation.IsValid ? Ok($"User authenticated.\nToken: {token}") : BadRequest(validation.ErrorMessages);
     }
 }

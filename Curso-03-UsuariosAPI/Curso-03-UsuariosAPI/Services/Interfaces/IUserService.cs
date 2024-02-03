@@ -7,5 +7,5 @@ namespace Curso_03_UsuariosAPI.Services.Interfaces;
 public interface IUserService
 {
     public Task<ValidationResult> CreateUserAsync(CreateUserDto dto);
-    public Task<ValidationResult> LoginUserAsync(LoginUserDto dto);
+    public Task<(ValidationResult, string)> LoginUserAsync(LoginUserDto dto);
 }

@@ -12,12 +12,14 @@ public class UserService : IUserService
     private readonly UserManager<User> _userManager;
     private readonly SignInManager<User> _signInManager;
     private readonly IMapper _mapper;
+    private readonly ITokenService _tokenService;
 
-    public UserService(UserManager<User> userManager, IMapper mapper, SignInManager<User> signInManager)
+    public UserService(UserManager<User> userManager, IMapper mapper, SignInManager<User> signInManager, ITokenService tokenService)
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _mapper = mapper;
+        _tokenService = tokenService;
     }
 
     public async Task<ValidationResult> CreateUserAsync(CreateUserDto dto)
@@ -35,7 +37,7 @@ public class UserService : IUserService
         return validation;
     }
 
-    public async Task<ValidationResult> LoginUserAsync(LoginUserDto dto)
+    public async Task<(ValidationResult, string)> LoginUserAsync(LoginUserDto dto)
     {
         var validation = new ValidationResult();
 
@@ -44,8 +46,12 @@ public class UserService : IUserService
         if (!result.Succeeded)
         {
             validation.AddError("An error ocurred on login.");
+            return (validation, string.Empty);
         }
 
-        return validation;
+        var user = _signInManager.UserManager.Users.FirstOrDefault(x => x.NormalizedUserName == dto.UserName.ToUpper());
+        string token = _tokenService.GetToken(user);
+
+        return (validation, token);
     }
 }
