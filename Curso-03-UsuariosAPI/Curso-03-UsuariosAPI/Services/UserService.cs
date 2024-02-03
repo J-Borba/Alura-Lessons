@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Curso_03_UsuariosAPI.Data.D0tos.Usuario;
+using Curso_03_UsuariosAPI.Data.Dtos.Usuario;
 using Curso_03_UsuariosAPI.Models;
 using Curso_03_UsuariosAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -9,11 +10,13 @@ namespace Curso_03_UsuariosAPI.Services;
 public class UserService : IUserService
 {
     private readonly UserManager<User> _userManager;
+    private readonly SignInManager<User> _signInManager;
     private readonly IMapper _mapper;
 
-    public UserService(UserManager<User> userManager, IMapper mapper)
+    public UserService(UserManager<User> userManager, IMapper mapper, SignInManager<User> signInManager)
     {
         _userManager = userManager;
+        _signInManager = signInManager;
         _mapper = mapper;
     }
 
@@ -27,6 +30,20 @@ public class UserService : IUserService
         if (!result.Succeeded)
         {
             validation.AddErrors(result.Errors.Select(x => x.Description));
+        }
+
+        return validation;
+    }
+
+    public async Task<ValidationResult> LoginUserAsync(LoginUserDto dto)
+    {
+        var validation = new ValidationResult();
+
+        var result = await _signInManager.PasswordSignInAsync(dto.UserName, dto.Password, isPersistent: false, lockoutOnFailure: false);
+
+        if (!result.Succeeded)
+        {
+            validation.AddError("An error ocurred on login.");
         }
 
         return validation;

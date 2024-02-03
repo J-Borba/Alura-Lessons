@@ -5,7 +5,7 @@ namespace Curso_03_UsuariosAPI.Data.D0tos.Usuario;
 public class CreateUserDto
 {
     [Required]
-    public string Username { get; set; } = string.Empty;
+    public string UserName { get; set; } = string.Empty;
     [Required]
     public DateTime BirthDate { get; set; }
     [Required, DataType(DataType.Password)]
