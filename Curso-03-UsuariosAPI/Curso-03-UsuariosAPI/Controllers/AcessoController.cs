@@ -9,6 +9,6 @@ public class AcessoController : ControllerBase
     [HttpGet, Authorize("IdadeMinima")]
     public IActionResult Get()
     {
-        return Ok();
+        return Ok("Acesso Permitido.");
     }
 }

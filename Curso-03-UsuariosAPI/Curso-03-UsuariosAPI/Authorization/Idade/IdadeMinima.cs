@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 
-namespace Curso_03_UsuariosAPI.Authorization;
+namespace Curso_03_UsuariosAPI.Authorization.Idade;
 
 public class IdadeMinima : IAuthorizationRequirement
 {

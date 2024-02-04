@@ -9,6 +9,13 @@ namespace Curso_03_UsuariosAPI.Services;
 
 public class TokenService : ITokenService
 {
+    private readonly IConfiguration _configuration;
+
+    public TokenService(IConfiguration configuration)
+    {
+        _configuration = configuration;
+    }
+
     public string GetToken(User user)
     {
         var claims = new Claim[]
@@ -18,7 +25,7 @@ public class TokenService : ITokenService
             new(ClaimTypes.DateOfBirth, user.BirthDate.ToShortDateString())
         };
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("e90FJWRE90CK9QEVM902F=K329FVNR2I-249FE-"));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["SymmetricSecurityKey"]));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
         var token = new JwtSecurityToken(
