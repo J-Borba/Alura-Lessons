@@ -9,7 +9,7 @@
   ],
   "parserOptions": {
     "parser": "@babel/eslint-parser",
-    "ecmaVersion": "latest",
+    "ecmaVersion": 2016,
     "sourceType": "module",
     "requireConfigFile": false
   },
