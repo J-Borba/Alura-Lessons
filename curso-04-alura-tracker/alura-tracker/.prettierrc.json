@@ -1,0 +1,14 @@
+{
+  "tabWidth": 2,
+  "semi": true,
+  "singleQuote": true,
+  "bracketSameLine": true,
+  "bracketSpacing": true,
+  "printWidth": 120,
+  "arrowParens": "always",
+  "endOfLine": "lf",
+  "trailingComma": "all",
+  "embeddedLanguageFormatting": "auto",
+  "useTabs": true,
+  "vueIndentScriptAndStyle": true
+}
